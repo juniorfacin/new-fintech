@@ -9,6 +9,7 @@ public abstract class Transaction {
     private String method;
     private double value;
     private boolean type;
+    private String description;
 
     public Transaction() {}
 
@@ -53,6 +54,14 @@ public abstract class Transaction {
             throw new IllegalArgumentException("O valor não pode ser negativo!");
         }
         this.value = value;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getFormattedTimestamp() {

@@ -1,6 +1,5 @@
 package br.com.moneyiteasy.service.user;
 import br.com.moneyiteasy.model.User;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;

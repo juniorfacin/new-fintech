@@ -76,4 +76,11 @@ public abstract class Transaction {
     public void setType(boolean type) {
         this.type = type;
     }
+
+    public static class Investment extends Transaction {
+        private int id;
+        private double amount;
+        private String description;
+
+    }
 }

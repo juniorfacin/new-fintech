@@ -10,7 +10,8 @@ public class BankAccount {
     public BankAccount() {
     }
 
-    public BankAccount(String nameBank, String numberBank, String agencyBank, String accountNumber, String accountNumberDigit) {
+    public BankAccount(String nameBank, String numberBank, String agencyBank,
+                       String accountNumber, String accountNumberDigit) {
         this.nameBank = nameBank;
         this.numberBank = numberBank;
         this.agencyBank = agencyBank;

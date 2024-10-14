@@ -2,7 +2,6 @@ package br.com.moneyiteasy.dao;
 import br.com.moneyiteasy.exception.EntityNotFoundException;
 import br.com.moneyiteasy.factory.ConnectionFactory;
 import br.com.moneyiteasy.model.BankAccount;
-import oracle.jdbc.proxy.annotation.Pre;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

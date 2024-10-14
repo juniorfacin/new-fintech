@@ -11,17 +11,17 @@ public class User {
     private String date;
     private String balance;
 
-//    public User() {
-//        this.id = UUID.randomUUID().toString();
-//    }
-//
-//    public User(String name, String email, String cpf, String password) {
-//        this();
-//        setName(name);
-//        setEmail(email);
-//        setCpf(cpf);
-//        setPassword(password);
-//    }
+    public User() {
+        this.id = UUID.randomUUID().toString();
+    }
+
+    public User(String name, String email, String cpf, String password) {
+        this();
+        setName(name);
+        setEmail(email);
+        setCpf(cpf);
+        setPassword(password);
+    }
 
 //    public String getId() { return id; }
 

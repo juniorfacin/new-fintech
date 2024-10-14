@@ -6,13 +6,13 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class InvestmentDao {
-    private Connection conexao;
+    private Connection connection;
 
     public InvestmentDao() throws SQLException {
-        conexao = ConnectionFactory.getConnection();
+        connection = ConnectionFactory.getConnection();
     }
 
     public void closeConexao() throws SQLException {
-        conexao.close();
+        connection.close();
     }
 }

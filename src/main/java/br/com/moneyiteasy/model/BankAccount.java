@@ -46,6 +46,18 @@ public class BankAccount {
         return nameBank;
     }
 
+    public void setIdBankAccount(int idBankAccount) {
+        this.idBankAccount = idBankAccount;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
+
+    public void setNameBank(String nameBank) {
+        this.nameBank = nameBank;
+    }
+
     public int getNumberBank() {
         return numberBank;
     }

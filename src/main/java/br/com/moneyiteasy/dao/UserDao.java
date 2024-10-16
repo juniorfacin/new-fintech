@@ -16,18 +16,17 @@ public class UserDao {
     private Connection connection;
 
     public boolean addUser(User user) {
-        String sql = "INSERT INTO t_user (id_user, nm_user, tx_email, nr_cpf, tx_password, dt_creation, vl_balance)" +
-                "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO t_user ( nm_user, tx_email, nr_cpf, tx_password, dt_creation, vl_balance)" +
+                "VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = ConnectionFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt (1, user.getId());
-            statement.setString (2, user.getName());
-            statement.setString (3, user.getEmail());
-            statement.setString (4, user.getCpf());
-            statement.setString (5, user.getPassword());
-            statement.setDate (6, java.sql.Date.valueOf(user.getDate()));
-            statement.setDouble (7, user.getBalance());
+            statement.setString (1, user.getName());
+            statement.setString (2, user.getEmail());
+            statement.setString (3, user.getCpf());
+            statement.setString (4, user.getPassword());
+            statement.setDate (5, java.sql.Date.valueOf(user.getDate()));
+            statement.setDouble (6, user.getBalance());
 
             int rowsInserted = statement.executeUpdate();
             return rowsInserted > 0;
@@ -37,14 +36,14 @@ public class UserDao {
         }
     }
 
-    public boolean deleteUser(User user) {
-        String sql = "DELETE FROM t_user WHERE (nr_cpf) " +
-                "VALUES (?)";
+    public boolean deleteUser(String cpf) {
+        String sql = "DELETE FROM t_user WHERE nr_cpf = ?";
 
         try (Connection connection = ConnectionFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString (3, user.getCpf());
-            return true;
+            statement.setString (1, cpf);
+            int rowsDeleted = statement.executeUpdate();
+            return rowsDeleted > 0;
         } catch (SQLException e) {
             System.err.println("Erro ao inserir o usuario no banco: " + e.getMessage());
             return false;

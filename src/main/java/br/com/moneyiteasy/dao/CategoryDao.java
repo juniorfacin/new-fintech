@@ -15,7 +15,7 @@ public class CategoryDao {
     private Connection connection;
 
     public boolean addExpenseCategory(Category category) throws SQLException {
-        String sql = "INSERT INTO t_expense_category (description) " +
+        String sql = "INSERT INTO t_expense_category (ds_expense_category) " +
                 "VALUES (?)";
 
         try (Connection connection = ConnectionFactory.getConnection();
@@ -29,14 +29,14 @@ public class CategoryDao {
         }
     }
 
-    public boolean deleteExpenseCategory(Category category) throws SQLException {
-        String sql = "DELETE FROM t_expense_category WHERE (description) " +
-                "VALUES (?)";
+    public boolean deleteExpenseCategory(String category) throws SQLException {
+        String sql = "DELETE FROM t_expense_category WHERE ds_expense_category = ?";
 
         try (Connection connection = ConnectionFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString (1, category.getCategoryName());
-            return true;
+            statement.setString (1, category);
+            int rowsDeleted = statement.executeUpdate();
+            return rowsDeleted > 0;
         } catch (SQLException e) {
             System.err.println("Erro ao inserir a categoria no banco: " + e.getMessage());
             return false;
@@ -52,8 +52,9 @@ public class CategoryDao {
              ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
-                String nome = resultSet.getString("nome");
-                Category category = new Category(nome);
+                int id = resultSet.getInt("id_expense_category");
+                String nome = resultSet.getString("ds_expense_category");
+                Category category = new Category(id, nome);
                 categorys.add(category);
             }
             return categorys;
@@ -65,7 +66,7 @@ public class CategoryDao {
     }
 
     public boolean addRevenueCategory(Category category) throws SQLException {
-        String sql = "INSERT INTO t_revenue_category (description) " +
+        String sql = "INSERT INTO t_revenue_category (ds_revenue_category) " +
                 "VALUES (?)";
 
         try (Connection connection = ConnectionFactory.getConnection();
@@ -79,14 +80,14 @@ public class CategoryDao {
         }
     }
 
-    public boolean deleteRevenueCategory(Category category) throws SQLException {
-        String sql = "DELETE FROM t_revenue_category WHERE (description) " +
-                "VALUES (?)";
+    public boolean deleteRevenueCategory(String category) throws SQLException {
+        String sql = "DELETE FROM t_revenue_category WHERE ds_revenue_category = ?";
 
         try (Connection connection = ConnectionFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString (1, category.getCategoryName());
-            return true;
+            statement.setString (1, category);
+            int rowsDeleted = statement.executeUpdate();
+            return rowsDeleted > 0;
         } catch (SQLException e) {
             System.err.println("Erro ao inserir a categoria no banco: " + e.getMessage());
             return false;
@@ -102,8 +103,9 @@ public class CategoryDao {
              ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
-                String nome = resultSet.getString("nome");
-                Category category = new Category(nome);
+                int id = resultSet.getInt("id_revenue_category");
+                String nome = resultSet.getString("ds_revenue_category");
+                Category category = new Category(id, nome);
                 categorys.add(category);
             }
             return categorys;
@@ -115,7 +117,7 @@ public class CategoryDao {
     }
 
     public boolean addInvestmentCategory(Category category) throws SQLException {
-        String sql = "INSERT INTO t_investment_category (description) " +
+        String sql = "INSERT INTO t_investment_category (ds_investment_category) " +
                 "VALUES (?)";
 
         try (Connection connection = ConnectionFactory.getConnection();
@@ -129,14 +131,14 @@ public class CategoryDao {
         }
     }
 
-    public boolean deleteInvestmentCategory(Category category) throws SQLException {
-        String sql = "DELETE FROM t_investiment_category WHERE (description) " +
-                "VALUES (?)";
+    public boolean deleteInvestmentCategory(String category) throws SQLException {
+        String sql = "DELETE FROM t_investment_category WHERE ds_investment_category = ?";
 
         try (Connection connection = ConnectionFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString (1, category.getCategoryName());
-            return true;
+            statement.setString (1, category);
+            int rowsDeleted = statement.executeUpdate();
+            return rowsDeleted > 0;
         } catch (SQLException e) {
             System.err.println("Erro ao inserir a categoria no banco: " + e.getMessage());
             return false;
@@ -144,7 +146,7 @@ public class CategoryDao {
     }
 
     public List<Category> getAllInvestmentCategory() {
-        String sql = "SELECT * FROM t_investiment_category";
+        String sql = "SELECT * FROM t_investment_category";
         List<Category> categorys = new ArrayList<>();
 
         try (Connection connection = ConnectionFactory.getConnection();
@@ -152,8 +154,9 @@ public class CategoryDao {
              ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
-                String nome = resultSet.getString("nome");
-                Category category = new Category(nome);
+                int id = resultSet.getInt("id_investment_category");
+                String nome = resultSet.getString("ds_investment_category");
+                Category category = new Category(id, nome);
                 categorys.add(category);
             }
             return categorys;

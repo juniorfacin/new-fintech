@@ -15,6 +15,15 @@ public class User {
     public User() {
     }
 
+    public User(String name, String email, String cpf, String password, LocalDate date, double balance) {
+        this.name = name;
+        this.email = email;
+        this.cpf = cpf;
+        this.password = password;
+        this.date = LocalDate.now();
+        this.balance = balance;
+    }
+
     public User(int id, String name, String email, String cpf, String password, LocalDate date, double balance) {
         this.id = id;
         this.name = name;
@@ -25,14 +34,7 @@ public class User {
         this.balance = balance;
     }
 
-    public User(String name, String email, String cpf, String password, LocalDate date, double balance) {
-        this.name = name;
-        this.email = email;
-        this.cpf = cpf;
-        this.password = password;
-        this.date = LocalDate.now();
-        this.balance = balance;
-    }
+
 
     public int getId() { return id; }
 

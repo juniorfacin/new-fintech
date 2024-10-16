@@ -3,37 +3,31 @@ package br.com.moneyiteasy.dao;
 import br.com.moneyiteasy.factory.ConnectionFactory;
 import br.com.moneyiteasy.model.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class UserDao {
-    private Connection connection;
 
-    public boolean addUser(User user) {
-        String sql = "INSERT INTO t_user ( nm_user, tx_email, nr_cpf, tx_password, dt_creation, vl_balance)" +
-                "VALUES (?, ?, ?, ?, ?, ?)";
+    public boolean addUser(User user) throws SQLException {
+        String sql = "INSERT INTO t_user (nm_user, tx_email, nr_cpf, tx_password, dt_creation)" +
+                "VALUES (?, ?, ?, ?, ?)";
 
         try (Connection connection = ConnectionFactory.getConnection();
-                PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString (1, user.getName());
-            statement.setString (2, user.getEmail());
-            statement.setString (3, user.getCpf());
-            statement.setString (4, user.getPassword());
-            statement.setDate (5, java.sql.Date.valueOf(user.getDate()));
-            statement.setDouble (6, user.getBalance());
-
-            int rowsInserted = statement.executeUpdate();
-            return rowsInserted > 0;
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getEmail());
+            statement.setString(3, user.getCpf());
+            statement.setString(4, user.getPassword());
+            statement.setDate(5, java.sql.Date.valueOf(user.getDate()));
+            statement.executeUpdate();
         } catch (SQLException e) {
-            System.err.println("Erro ao inserir o usuario no banco: " + e.getMessage());
+            System.err.println("Erro ao adicionar usuário: " + e.getMessage());
             return false;
         }
+        return true;
     }
 
     public boolean deleteUser(String cpf) {
@@ -41,16 +35,16 @@ public class UserDao {
 
         try (Connection connection = ConnectionFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString (1, cpf);
+            statement.setString(1, cpf);
             int rowsDeleted = statement.executeUpdate();
             return rowsDeleted > 0;
         } catch (SQLException e) {
-            System.err.println("Erro ao inserir o usuario no banco: " + e.getMessage());
+            System.err.println("Erro ao deletar o usuário no banco: " + e.getMessage());
             return false;
         }
     }
 
-    public List<User> getAllUsers() {
+    public List<User> getAllUserTable() {
         String sql = "SELECT * FROM t_user";
         List<User> users = new ArrayList<>();
 
@@ -65,8 +59,7 @@ public class UserDao {
                 String cpf = resultSet.getString("nr_cpf");
                 String password = resultSet.getString("tx_password");
                 LocalDate date = resultSet.getDate("dt_creation").toLocalDate();
-                double balance = resultSet.getDouble("vl_balance");
-                User user = new User(id, name, email, cpf, password, date, balance);
+                User user = new User(id, name, email, cpf, password, date);
                 users.add(user);
             }
             return users;
@@ -77,8 +70,25 @@ public class UserDao {
         }
     }
 
-    public void closeConexao() throws SQLException {
-        connection.close();
-    }
+    public List<User> getUserNamesAndCpfs() {
+        String sql = "SELECT nm_user, nr_cpf FROM t_user";
+        List<User> users = new ArrayList<>();
 
+        try (Connection connection = ConnectionFactory.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+                String name = resultSet.getString("nm_user");
+                String cpf = resultSet.getString("nr_cpf");
+                User user = new User(name, cpf);
+                users.add(user);
+            }
+            return users;
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao buscar os nomes e CPFs dos usuários no banco: " + e.getMessage());
+            return Collections.emptyList();
+        }
+    }
 }

@@ -1,7 +1,6 @@
 package br.com.moneyiteasy.model;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 public class User {
     private int id;
@@ -10,30 +9,32 @@ public class User {
     private String cpf;
     private String password;
     private LocalDate date;
-    private double balance;
 
     public User() {
+        this.date = LocalDate.now();
     }
 
-    public User(String name, String email, String cpf, String password, LocalDate date, double balance) {
+    public User(String name, String email, String cpf, String password) {
         this.name = name;
         this.email = email;
         this.cpf = cpf;
         this.password = password;
         this.date = LocalDate.now();
-        this.balance = balance;
     }
 
-    public User(int id, String name, String email, String cpf, String password, LocalDate date, double balance) {
+    public User(int id, String name, String email, String cpf, String password, LocalDate date) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.cpf = cpf;
         this.password = password;
-        this.date = LocalDate.now();
-        this.balance = balance;
+        this.date = date;
     }
 
+    public User(String name, String cpf){
+        this.name = name;
+        this.cpf = cpf;
+    }
 
 
     public int getId() { return id; }
@@ -78,18 +79,6 @@ public class User {
 
     public LocalDate getDate() {
         return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
     }
 
     public void displayUser() {

@@ -1,8 +1,9 @@
 package br.com.moneyiteasy.service.transaction;
 
-import br.com.moneyiteasy.model.DataHorario;
+
 import br.com.moneyiteasy.model.transaction.Transaction;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,6 @@ import java.util.Scanner;
 
 public abstract class TransactionManager {
     protected List<Transaction> transactions = new ArrayList<>();
-    protected DataHorario dataHorario = new DataHorario();
 
     public void addTransaction(Scanner scanner) {
         System.out.println("Digite a categoria da " + getTransactionType() + ": ");
@@ -21,8 +21,8 @@ public abstract class TransactionManager {
         System.out.println("Digite o método de pagamento: ");
         String method = scanner.nextLine();
 
-        LocalDateTime timestamp = dataHorario.getDateTime();
-        Transaction transaction = createTransaction(category, value, timestamp, method);
+
+        Transaction transaction = createTransaction(category, value, LocalDateTime.now(), method);
         transactions.add(transaction);
     }
 

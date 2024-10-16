@@ -6,7 +6,6 @@ CREATE TABLE t_user
     nr_cpf      NUMBER(11),
     tx_password VARCHAR2(255),
     dt_creation DATE,
-    vl_balance  NUMBER(9, 2),
     CONSTRAINT t_user_pk PRIMARY KEY (id_user)
 );
 
@@ -106,5 +105,3 @@ CREATE TABLE t_revenue
     CONSTRAINT fk_transaction_revenue FOREIGN KEY (id_transaction)
         REFERENCES t_transaction (id_transaction)
 );
-
-

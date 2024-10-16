@@ -1,30 +1,32 @@
 package br.com.moneyiteasy.service.user;
+
+import br.com.moneyiteasy.dao.UserDao;
 import br.com.moneyiteasy.model.User;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class UserManager {
-    private List<User> users = new ArrayList<>();
+    private UserDao userDao = new UserDao();
 
     public void addUser(Scanner scanner) {
         System.out.println("Cadastro de Usuário.");
-        User user = new User();
-
         boolean success = false;
+
         while (!success) {
             try {
+                User user = new User();  // Cria uma nova instância a cada tentativa
                 System.out.println("Nome: ");
-                user.setName(scanner.nextLine());
+                user.setName(scanner.nextLine().trim());
                 System.out.println("Email: ");
-                user.setEmail(scanner.nextLine());
+                user.setEmail(scanner.nextLine().trim());
                 System.out.println("CPF (apenas números): ");
-                user.setCpf(scanner.nextLine());
+                user.setCpf(scanner.nextLine().trim());
                 System.out.println("Senha: ");
-                user.setPassword(scanner.nextLine());
+                user.setPassword(scanner.nextLine().trim());
 
                 if (!isUserExists(user)) {
-                    users.add(user);
+                    userDao.addUser(user);
                     System.out.println("Usuário cadastrado com sucesso!");
                     success = true;
                 } else {
@@ -32,13 +34,16 @@ public class UserManager {
                 }
             } catch (IllegalArgumentException e) {
                 System.out.println("Erro ao cadastrar usuário: " + e.getMessage());
+            } catch (SQLException e) {
+                System.out.println("Erro de banco de dados: " + e.getMessage());
+                success = true;  // Para evitar looping infinito em caso de erro de conexão
             }
         }
     }
 
     public void displayUsers() {
-        if (!users.isEmpty()) {
-            for (User user : users) {
+        if (!userDao.getUserNamesAndCpfs().isEmpty()) {
+            for (User user : userDao.getUserNamesAndCpfs()) {
                 user.displayUser();
             }
         } else {
@@ -47,7 +52,7 @@ public class UserManager {
     }
 
     private boolean isUserExists(User user) {
-        return users.stream()
-                .anyMatch(u -> u.getEmail().equals(user.getEmail()) || u.getCpf().equals(user.getCpf()));
+        return userDao.getUserNamesAndCpfs().stream()
+                .anyMatch(u -> u.getName().equals(user.getName()) || u.getCpf().equals(user.getCpf()));
     }
 }

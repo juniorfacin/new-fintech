@@ -4,6 +4,7 @@ import br.com.moneyiteasy.dao.UserDao;
 import br.com.moneyiteasy.model.User;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserManager {
@@ -15,7 +16,7 @@ public class UserManager {
 
         while (!success) {
             try {
-                User user = new User();  // Cria uma nova instância a cada tentativa
+                User user = new User();
                 System.out.println("Nome: ");
                 user.setName(scanner.nextLine().trim());
                 System.out.println("Email: ");
@@ -36,7 +37,7 @@ public class UserManager {
                 System.out.println("Erro ao cadastrar usuário: " + e.getMessage());
             } catch (SQLException e) {
                 System.out.println("Erro de banco de dados: " + e.getMessage());
-                success = true;  // Para evitar looping infinito em caso de erro de conexão
+                success = true;
             }
         }
     }
@@ -55,4 +56,32 @@ public class UserManager {
         return userDao.getUserNamesAndCpfs().stream()
                 .anyMatch(u -> u.getName().equals(user.getName()) || u.getCpf().equals(user.getCpf()));
     }
+
+    public void displayAllUsersContent() {
+        List<User> users = userDao.getAllUserTable();
+        if (!users.isEmpty()) {
+            for (User user : users) {
+                System.out.println("ID Conta: " + user.getId());
+                System.out.println("ID nome: " + user.getName());
+                System.out.println("ID cpf: " + user.getCpf());
+                System.out.println("ID email: " + user.getEmail());
+                System.out.println("ID senha: " + user.getPassword());
+                System.out.println("ID criação: " + user.getDate());
+                System.out.println("---------------------------------");
+            }
+        }else {
+            System.out.println("Nenhuma conta bancária encontrada.");
+        }
+    }
+
+    public void deleteUser(Scanner scanner) {
+        System.out.println("Informe o CPF do usuário a ser deletado:");
+        String cpf = scanner.nextLine();
+        if (userDao.deleteUser(cpf)){
+            System.out.println("Usuario deletado com sucesso!");
+        } else {
+            System.out.println("Usuario não encontrado");
+        }
+    }
+
 }

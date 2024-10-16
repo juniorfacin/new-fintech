@@ -71,7 +71,7 @@ public class UserDao {
     }
 
     public List<User> getUserNamesAndCpfs() {
-        String sql = "SELECT nm_user, nr_cpf FROM t_user";
+        String sql = "SELECT nm_user, nr_cpf, tx_email FROM t_user";
         List<User> users = new ArrayList<>();
 
         try (Connection connection = ConnectionFactory.getConnection();
@@ -81,7 +81,8 @@ public class UserDao {
             while (resultSet.next()) {
                 String name = resultSet.getString("nm_user");
                 String cpf = resultSet.getString("nr_cpf");
-                User user = new User(name, cpf);
+                String email = resultSet.getString("tx_email");
+                User user = new User(name, cpf, email);
                 users.add(user);
             }
             return users;

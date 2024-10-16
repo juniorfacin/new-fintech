@@ -20,13 +20,15 @@ public class FintechApp {
         do {
             System.out.println("\nSejam bem-vindo(a) ao Money It Easy! Escolha uma opção: ");
             System.out.println("1-Cadastrar Usuário: ");
-            System.out.println("2-Exibir Usuário: ");
-            System.out.println("3-Cadastrar Receita: ");
-            System.out.println("4-Exibir Receita: ");
-            System.out.println("5-Cadastrar Despesa: ");
-            System.out.println("6-Exibir Despesa: ");
-            System.out.println("7-Cadastrar conta bancária: ");
-            System.out.println("8-Exibir conta bancária: ");
+            System.out.println("2-Exibir Usuários: ");
+            System.out.println("3-Exibir todas informações dos usuários: ");
+            System.out.println("4-Deletar Usuário: ");
+            System.out.println("-Cadastrar Receita: ");
+            System.out.println("-Exibir Receita: ");
+            System.out.println("-Cadastrar Despesa: ");
+            System.out.println("-Exibir Despesa: ");
+            System.out.println("-Cadastrar conta bancária: ");
+            System.out.println("-Exibir conta bancária: ");
             System.out.println("0-Sair");
             op = scanner.nextInt();
             scanner.nextLine();
@@ -39,21 +41,27 @@ public class FintechApp {
                     userManager.displayUsers();
                     break;
                 case 3:
-                    revenueManager.addTransaction(scanner);
+                    userManager.displayAllUsersContent();
                     break;
                 case 4:
-                    revenueManager.displayTransactions();
+                    userManager.deleteUser(scanner);
                     break;
                 case 5:
-                    expenseManager.addTransaction(scanner);
+                    revenueManager.addTransaction(scanner);
                     break;
                 case 6:
-                    expenseManager.displayTransactions();
+                    revenueManager.displayTransactions();
                     break;
                 case 7:
-//                    bankManager.addBankAccount(scanner);
+                    expenseManager.addTransaction(scanner);
                     break;
                 case 8:
+                    expenseManager.displayTransactions();
+                    break;
+                case 9:
+//                    bankManager.addBankAccount(scanner);
+                    break;
+                case 10:
 //                    bankManager.displayBankAccounts();
                     break;
                 case 0:

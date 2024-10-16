@@ -16,4 +16,6 @@ public class ExpenseManager extends TransactionManager {
     protected Transaction createTransaction(String category, double value, LocalDateTime timestamp, String method) {
         return new Expense(category, value, timestamp, method, false);
     }
+
+
 }

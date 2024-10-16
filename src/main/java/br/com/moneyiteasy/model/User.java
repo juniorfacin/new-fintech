@@ -31,9 +31,10 @@ public class User {
         this.date = date;
     }
 
-    public User(String name, String cpf){
+    public User(String name, String cpf, String email){
         this.name = name;
         this.cpf = cpf;
+        this.email = email;
     }
 
 

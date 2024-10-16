@@ -92,4 +92,25 @@ public class UserDao {
             return Collections.emptyList();
         }
     }
+
+    public int getUserIdbyCpf(long cpf) {
+        String sql = "SELECT id_user FROM t_user WHERE nr_cpf = ?";
+
+        try (Connection connection = ConnectionFactory.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setLong(1, cpf);
+            try (ResultSet resultSet = statement.executeQuery()) {
+
+                if (resultSet.next()) {
+                    return resultSet.getInt("id_user");
+                } else {
+                    return -1;
+                }
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao buscar os nomes e CPFs dos usuários no banco: " + e.getMessage());
+            return -1;
+        }
+    }
 }

@@ -1,6 +1,6 @@
 package br.com.moneyiteasy;
 
-//import br.com.moneyiteasy.service.bank.BankManager;
+import br.com.moneyiteasy.service.bank.BankManager;
 import br.com.moneyiteasy.service.transaction.ExpenseManager;
 import br.com.moneyiteasy.service.transaction.RevenueManager;
 import br.com.moneyiteasy.service.user.UserManager;
@@ -12,7 +12,7 @@ public class FintechApp {
         Scanner scanner = new Scanner(System.in);
 
         UserManager userManager = new UserManager();
-//        BankManager bankManager = new BankManager();
+        BankManager bankManager = new BankManager();
         RevenueManager revenueManager = new RevenueManager();
         ExpenseManager expenseManager = new ExpenseManager();
         int op;
@@ -59,10 +59,10 @@ public class FintechApp {
                     expenseManager.displayTransactions();
                     break;
                 case 9:
-//                    bankManager.addBankAccount(scanner);
+                    bankManager.addBankAccount(scanner);
                     break;
                 case 10:
-//                    bankManager.displayBankAccounts();
+                    bankManager.displayAllUsersContent();
                     break;
                 case 0:
                     System.out.println("Finalizando o sistema...");

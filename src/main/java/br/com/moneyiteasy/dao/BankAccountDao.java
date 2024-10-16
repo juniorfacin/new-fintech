@@ -2,13 +2,11 @@ package br.com.moneyiteasy.dao;
 
 import br.com.moneyiteasy.factory.ConnectionFactory;
 import br.com.moneyiteasy.model.BankAccount;
-import br.com.moneyiteasy.model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -81,8 +79,31 @@ public class BankAccountDao {
         }
     }
 
-    public void closeConexao() throws SQLException {
-        connection.close();
-    }
+    public List<BankAccount> getBankAccountsByUserId(int userId) {
+        String sql = "SELECT * FROM t_bank_account WHERE id_user = ?";
+        List<BankAccount> bankAccounts = new ArrayList<>();
 
+        try (Connection connection = ConnectionFactory.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, userId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    int idBankAccount = resultSet.getInt("id_bank_account");
+                    String nameBank = resultSet.getString("nm_bank");
+                    int numberBank = resultSet.getInt("nr_bank");
+                    String agencyBank = resultSet.getString("nr_agency");
+                    String accountNumber = resultSet.getString("nr_account");
+                    String accountNumberDigit = resultSet.getString("nr_account_digit");
+                    BankAccount bankAccount = new BankAccount(idBankAccount, userId, nameBank, numberBank,
+                            agencyBank, accountNumber, accountNumberDigit);
+                    bankAccounts.add(bankAccount);
+                }
+            }
+            return bankAccounts;
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao buscar as Contas Bancárias : " + e.getMessage());
+            return Collections.emptyList();
+        }
+    }
 }

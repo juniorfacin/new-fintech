@@ -69,7 +69,7 @@ public class UserManager {
                 System.out.println("ID criação: " + user.getDate());
                 System.out.println("---------------------------------");
             }
-        }else {
+        } else {
             System.out.println("Nenhuma conta bancária encontrada.");
         }
     }

@@ -9,10 +9,10 @@ public class BankAccount {
     private String accountNumber;
     private String accountNumberDigit;
 
-    public BankAccount(){
+    public BankAccount() {
     }
 
-    public BankAccount(int idBankAccount, int idUser, String nameBank, int numberBank,
+    public BankAccount( int idBankAccount, int idUser, String nameBank, int numberBank,
                        String agencyBank, String accountNumber, String accountNumberDigit) {
         this.idBankAccount = idBankAccount;
         this.idUser = idUser;
@@ -23,9 +23,8 @@ public class BankAccount {
         this.accountNumberDigit = accountNumberDigit;
     }
 
-    public BankAccount(int idUser, String nameBank, int numberBank,
+    public BankAccount( int idUser, String nameBank, int numberBank,
                        String agencyBank, String accountNumber, String accountNumberDigit) {
-        this.idUser = idUser;
         this.nameBank = nameBank;
         this.numberBank = numberBank;
         this.agencyBank = agencyBank;
@@ -90,7 +89,7 @@ public class BankAccount {
         this.accountNumberDigit = accountNumberDigit;
     }
 
-    public void displayAccount(){
+    public void displayAccount() {
         System.out.printf("Nome do Banco: %s | Numero do Banco: %s | Agencia Bancária: %s | Conta Bancária: %s | Digito da conta: %s   ",
                 nameBank, numberBank, agencyBank, accountNumber, accountNumberDigit);
     }

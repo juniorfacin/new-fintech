@@ -34,17 +34,17 @@ public class ExpenseDao {
         }
     }
 
-    public boolean deleteBankAccount(String accountNumber) {
-        String sql = "DELETE FROM t_expense WHERE -escolher- = ?";
+    public boolean deleteExpense(int idTransaction) {
+        String sql = "DELETE FROM t_expense WHERE id_transaction = ?";
 
         try (Connection connection = ConnectionFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, accountNumber);
+            statement.setInt(1, idTransaction);
 
             int rowsDeleted = statement.executeUpdate();
             return rowsDeleted > 0;
         } catch (SQLException e) {
-            System.err.println("Erro ao apagar a Conta Bancária: " + e.getMessage());
+            System.err.println("Erro ao apagar despesa: " + e.getMessage());
             return false;
         }
     }

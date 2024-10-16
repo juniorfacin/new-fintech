@@ -1,17 +1,21 @@
 package br.com.moneyiteasy.model;
 
 public class BankAccount {
+    private int idBankAccount;
+    private int idUser;
     private String nameBank;
-    private String numberBank;
+    private int numberBank;
     private String agencyBank;
     private String accountNumber;
     private String accountNumberDigit;
 
-    public BankAccount() {
+    public BankAccount(){
     }
 
-    public BankAccount(String nameBank, String numberBank, String agencyBank,
-                       String accountNumber, String accountNumberDigit) {
+    public BankAccount(int idBankAccount, int idUser, String nameBank, int numberBank,
+                       String agencyBank, String accountNumber, String accountNumberDigit) {
+        this.idBankAccount = idBankAccount;
+        this.idUser = idUser;
         this.nameBank = nameBank;
         this.numberBank = numberBank;
         this.agencyBank = agencyBank;
@@ -19,19 +23,34 @@ public class BankAccount {
         this.accountNumberDigit = accountNumberDigit;
     }
 
+    public BankAccount(int idUser, String nameBank, int numberBank,
+                       String agencyBank, String accountNumber, String accountNumberDigit) {
+        this.idUser = idUser;
+        this.nameBank = nameBank;
+        this.numberBank = numberBank;
+        this.agencyBank = agencyBank;
+        this.accountNumber = accountNumber;
+        this.accountNumberDigit = accountNumberDigit;
+    }
+
+
+    public int getIdBankAccount() {
+        return idBankAccount;
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
     public String getNameBank() {
         return nameBank;
     }
 
-    public void setNameBank(String nameBank) {
-        this.nameBank = nameBank;
-    }
-
-    public String getNumberBank() {
+    public int getNumberBank() {
         return numberBank;
     }
 
-    public void setNumberBank(String numberBank) {
+    public void setNumberBank(int numberBank) {
         this.numberBank = numberBank;
     }
 
@@ -60,7 +79,8 @@ public class BankAccount {
     }
 
     public void displayAccount(){
-        System.out.printf("Nome do Banco: %s | Numero do Banco: %s | Agencia Bancária: %s | Conta Bancária: %s | Digito da conta: %s   ", nameBank, numberBank, agencyBank, accountNumber, accountNumberDigit);
+        System.out.printf("Nome do Banco: %s | Numero do Banco: %s | Agencia Bancária: %s | Conta Bancária: %s | Digito da conta: %s   ",
+                nameBank, numberBank, agencyBank, accountNumber, accountNumberDigit);
     }
 
 }

@@ -1,29 +1,40 @@
 package br.com.moneyiteasy.model;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 public class User {
-    private String id;
+    private int id;
     private String name;
     private String email;
     private String cpf;
     private String password;
-    private String date;
-    private String balance;
+    private LocalDate date;
+    private double balance;
 
     public User() {
-        this.id = UUID.randomUUID().toString();
     }
 
-    public User(String name, String email, String cpf, String password) {
-        this();
-        setName(name);
-        setEmail(email);
-        setCpf(cpf);
-        setPassword(password);
+    public User(int id, String name, String email, String cpf, String password, LocalDate date, double balance) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.cpf = cpf;
+        this.password = password;
+        this.date = LocalDate.now();
+        this.balance = balance;
     }
 
-//    public String getId() { return id; }
+    public User(String name, String email, String cpf, String password, LocalDate date, double balance) {
+        this.name = name;
+        this.email = email;
+        this.cpf = cpf;
+        this.password = password;
+        this.date = LocalDate.now();
+        this.balance = balance;
+    }
+
+    public int getId() { return id; }
 
     public String getName() {
         return name;
@@ -63,19 +74,19 @@ public class User {
         this.password = password;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public String getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(String balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 

@@ -1,12 +1,10 @@
-package br.com.moneyiteasy.service.bank;
+package br.com.moneyiteasy.service;
 
 
 import br.com.moneyiteasy.dao.BankAccountDao;
 import br.com.moneyiteasy.model.BankAccount;
 import br.com.moneyiteasy.dao.UserDao;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 

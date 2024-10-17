@@ -1,7 +1,7 @@
 package br.com.moneyiteasy.dao;
 
 import br.com.moneyiteasy.factory.ConnectionFactory;
-import br.com.moneyiteasy.model.transaction.Expense;
+import br.com.moneyiteasy.model.Expense;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,10 +21,10 @@ public class ExpenseDao {
 
         try (Connection connection = ConnectionFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, expense.getExpenseCategory());  // Supondo que você tem uma categoria de despesa associada
+            statement.setInt(1, expense.getExpenseCategory());
             statement.setDouble(2, expense.getValue());
             statement.setString(3, expense.getExpenseNote());
-            statement.setInt(4, expense.getIdUser());  // ID do usuário associado à despesa
+            statement.setInt(4, expense.getIdUser());
             statement.setDate(5, java.sql.Date.valueOf(expense.getTimestamp().toLocalDate()));  // Convertendo para o formato SQL
             int rowsInserted = statement.executeUpdate();
             return rowsInserted > 0;

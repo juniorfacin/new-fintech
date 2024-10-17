@@ -1,7 +1,7 @@
 package br.com.moneyiteasy.dao;
 
 import br.com.moneyiteasy.factory.ConnectionFactory;
-import br.com.moneyiteasy.model.transaction.Transaction;
+import br.com.moneyiteasy.model.Transaction;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

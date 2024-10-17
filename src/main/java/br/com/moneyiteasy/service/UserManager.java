@@ -1,4 +1,4 @@
-package br.com.moneyiteasy.service.user;
+package br.com.moneyiteasy.service;
 
 import br.com.moneyiteasy.dao.UserDao;
 import br.com.moneyiteasy.model.User;

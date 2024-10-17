@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class UserDao {
+    private Connection connection;
 
     public boolean addUser(User user) throws SQLException {
         String sql = "INSERT INTO t_user (nm_user, tx_email, nr_cpf, tx_password, dt_creation)" +
@@ -112,5 +113,9 @@ public class UserDao {
             System.err.println("Erro ao buscar os nomes e CPFs dos usuários no banco: " + e.getMessage());
             return -1;
         }
+    }
+
+    public void closeConexao() throws SQLException {
+        connection.close();
     }
 }

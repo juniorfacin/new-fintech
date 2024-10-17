@@ -1,4 +1,4 @@
-package br.com.moneyiteasy.model.transaction;
+package br.com.moneyiteasy.model;
 
 import java.time.LocalDateTime;
 

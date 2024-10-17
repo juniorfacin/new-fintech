@@ -1,7 +1,7 @@
-package br.com.moneyiteasy.service.transaction;
+package br.com.moneyiteasy.service;
 
-import br.com.moneyiteasy.model.transaction.Revenue;
-import br.com.moneyiteasy.model.transaction.Transaction;
+import br.com.moneyiteasy.model.Revenue;
+import br.com.moneyiteasy.model.Transaction;
 
 import java.time.LocalDateTime;
 import java.util.Scanner;

@@ -1,8 +1,8 @@
-package br.com.moneyiteasy.service.transaction;
+package br.com.moneyiteasy.service;
 
 import br.com.moneyiteasy.dao.InvestmentDao;
-import br.com.moneyiteasy.model.transaction.Investment;
-import br.com.moneyiteasy.model.transaction.Transaction;
+import br.com.moneyiteasy.model.Investment;
+import br.com.moneyiteasy.model.Transaction;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -4,8 +4,8 @@ import br.com.moneyiteasy.dao.BankAccountDao;
 import br.com.moneyiteasy.dao.UserDao;
 import br.com.moneyiteasy.model.BankAccount;
 import br.com.moneyiteasy.model.User;
-import br.com.moneyiteasy.service.bank.BankManager;
-import br.com.moneyiteasy.service.user.UserManager;
+import br.com.moneyiteasy.service.BankManager;
+import br.com.moneyiteasy.service.UserManager;
 
 import java.sql.SQLException;
 

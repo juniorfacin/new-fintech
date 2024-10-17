@@ -1,9 +1,10 @@
-package br.com.moneyiteasy.service.transaction;
+package br.com.moneyiteasy.service;
 
 import br.com.moneyiteasy.dao.ExpenseDao;
-import br.com.moneyiteasy.model.transaction.Expense;
-import br.com.moneyiteasy.model.transaction.Transaction;
+import br.com.moneyiteasy.model.Expense;
+import br.com.moneyiteasy.model.Transaction;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
@@ -22,7 +23,7 @@ public class ExpenseManager extends TransactionManager {
     }
 
     @Override
-    public void addTransaction(Scanner scanner) {
+    public void addTransaction(Scanner scanner) throws SQLException {
         super.addTransaction(scanner);
 
         Expense expense = (Expense) transactions.get(transactions.size() - 1);

@@ -1,9 +1,10 @@
-package br.com.moneyiteasy.service.transaction;
+package br.com.moneyiteasy.service;
 
 
-import br.com.moneyiteasy.model.transaction.Transaction;
+import br.com.moneyiteasy.dao.CategoryDao;
+import br.com.moneyiteasy.model.Transaction;
 
-import java.time.LocalDate;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +13,18 @@ import java.util.Scanner;
 public abstract class TransactionManager {
     protected List<Transaction> transactions = new ArrayList<>();
 
-    public void addTransaction(Scanner scanner) {
+    public void addTransaction(Scanner scanner) throws SQLException {
+
+        CategoryDao categoryDao = new CategoryDao();
+
+
         System.out.println("Digite a categoria da " + getTransactionType() + ": ");
         String category = scanner.nextLine();
+
+        if (getTransactionType().equals("despesa")) {
+            categoryDao.getExpenseCategoryIdbyName(category);
+        }
+
         System.out.println("Digite o valor da " + getTransactionType() + ": ");
         double value = scanner.nextDouble();
         scanner.nextLine();

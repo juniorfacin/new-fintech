@@ -1,15 +1,17 @@
 package br.com.moneyiteasy;
 
-import br.com.moneyiteasy.service.bank.BankManager;
-import br.com.moneyiteasy.service.transaction.ExpenseManager;
-import br.com.moneyiteasy.service.transaction.RevenueManager;
-import br.com.moneyiteasy.service.transaction.InvestmentManager;
-import br.com.moneyiteasy.service.user.UserManager;
+import br.com.moneyiteasy.service.BankManager;
+import br.com.moneyiteasy.service.ExpenseManager;
+import br.com.moneyiteasy.service.RevenueManager;
+import br.com.moneyiteasy.service.InvestmentManager;
+import br.com.moneyiteasy.service.CategoryManager;
+import br.com.moneyiteasy.service.UserManager;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class FintechApp {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         Scanner scanner = new Scanner(System.in);
 
         UserManager userManager = new UserManager();
@@ -17,6 +19,8 @@ public class FintechApp {
         RevenueManager revenueManager = new RevenueManager();
         ExpenseManager expenseManager = new ExpenseManager();
         InvestmentManager investmentManager = new InvestmentManager();
+        CategoryManager categoryManager = new CategoryManager();
+
         int op;
 
         do {
@@ -33,6 +37,12 @@ public class FintechApp {
             System.out.println("10 - Exibir Investimento");
             System.out.println("11 - Cadastrar Conta Bancária");
             System.out.println("12 - Exibir Conta Bancária");
+            System.out.println("13 - Cadastrar Categoria de Despesa");
+            System.out.println("14 - Exibir Categorias de Despesa");
+            System.out.println("15 - Deletar Categoria de Despesa");
+            System.out.println("16 - Cadastrar Categoria de Investimento");
+            System.out.println("17 - Exibir Categorias de Investimento");
+            System.out.println("18 - Deletar Categoria de Investimento");
             System.out.println("0 - Sair");
             op = scanner.nextInt();
             scanner.nextLine();
@@ -73,6 +83,24 @@ public class FintechApp {
                     break;
                 case 12:
                     bankManager.displayAllUsersContent();
+                    break;
+                case 13:
+                    categoryManager.addExpenseCategory(scanner);
+                    break;
+                case 14:
+                    categoryManager.displayExpenseCategories();
+                    break;
+                case 15:
+                    categoryManager.deleteExpenseCategory(scanner);
+                    break;
+                case 16:
+                    categoryManager.addInvestmentCategory(scanner);
+                    break;
+                case 17:
+                    categoryManager.displayInvestmentCategories();
+                    break;
+                case 18:
+                    categoryManager.deleteInvestmentCategory(scanner);
                     break;
                 case 0:
                     System.out.println("Finalizando o sistema...");

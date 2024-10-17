@@ -6,9 +6,11 @@ import br.com.moneyiteasy.model.transaction.Transaction;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Scanner;
 
 public class ExpenseManager extends TransactionManager {
     ExpenseDao expenseDao = new ExpenseDao();
+
     @Override
     protected String getTransactionType() {
         return "despesa";
@@ -19,8 +21,22 @@ public class ExpenseManager extends TransactionManager {
         return new Expense(category, value, timestamp, method, false);
     }
 
+    @Override
+    public void addTransaction(Scanner scanner) {
+        super.addTransaction(scanner);
+
+        Expense expense = (Expense) transactions.get(transactions.size() - 1);
+
+        if (expenseDao.addExpense(expense)) {
+            System.out.println("Despesa adicionada com sucesso.");
+        } else {
+            System.out.println("Erro ao adicionar despesa.");
+        }
+    }
+
+    @Override
     public void displayTransactions() {
-        List<Expense> expenses = expenseDao.getAllExpenses(); // Usando o DAO para buscar despesas
+        List<Expense> expenses = expenseDao.getAllExpenses();
         if (expenses.isEmpty()) {
             System.out.println("Nenhuma despesa cadastrada.");
         } else {
@@ -29,9 +45,7 @@ public class ExpenseManager extends TransactionManager {
                 System.out.printf("Categoria: %s | Valor: R$ %.2f | Data e Hora: %s | Método de pagamento: %s\n",
                         expense.getCategory(), expense.getValue(), expense.getFormattedTimestamp(), expense.getMethod());
             }
-            System.out.printf("Total de despesas: R$ %.2f\n", getTotalValue());
+            System.out.printf("Total de despesas: R$ %.2f\n", expenseDao.getTotalExpenses());
         }
     }
-
-
 }

@@ -39,6 +39,11 @@ public class Investment extends Transaction {
         this.description = description;
     }
 
+    public Investment(String category, double value, LocalDateTime timestamp, String method, boolean type){
+        super(category, value, timestamp,method, type);
+        this.setType(false);
+    }
+
     public int getIdTransaction() {
         return idTransaction;
     }

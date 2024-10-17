@@ -25,6 +25,7 @@ public class BankAccount {
 
     public BankAccount( int idUser, String nameBank, int numberBank,
                        String agencyBank, String accountNumber, String accountNumberDigit) {
+        this.idUser = idUser;
         this.nameBank = nameBank;
         this.numberBank = numberBank;
         this.agencyBank = agencyBank;

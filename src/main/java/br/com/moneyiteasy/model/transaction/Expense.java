@@ -35,6 +35,13 @@ public class Expense extends Transaction {
         this.setType(false);
     }
 
+    public Expense(int idExpense, String category, double value, String note, int idUser) {
+        super(category, value, LocalDateTime.now(), "", false);
+        this.setIdTransaction(idExpense);
+        this.expenseNote = note;
+        this.idUser = idUser;
+    }
+
     public int getIdTransaction() {
         return idTransaction;
     }

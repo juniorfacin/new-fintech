@@ -1,10 +1,13 @@
 package br.com.moneyiteasy;
 
 import br.com.moneyiteasy.dao.BankAccountDao;
+import br.com.moneyiteasy.dao.CategoryDao;
 import br.com.moneyiteasy.dao.UserDao;
 import br.com.moneyiteasy.model.BankAccount;
+import br.com.moneyiteasy.model.Category;
 import br.com.moneyiteasy.model.User;
 import br.com.moneyiteasy.service.BankManager;
+import br.com.moneyiteasy.service.CategoryManager;
 import br.com.moneyiteasy.service.UserManager;
 
 import java.sql.SQLException;
@@ -41,6 +44,24 @@ public class TesteDao {
         bankAccountDao.addBankAccount(bankAccount4);
         bankAccountDao.addBankAccount(bankAccount5);
         bankManager.displayAllUsersContent();
+
+        CategoryDao categoryDao = new CategoryDao();
+        Category category1 = new Category("Restaurante");
+        Category category2 = new Category("Casa");
+        Category category3 = new Category("Carro");
+        Category category4 = new Category("Mercado");
+        Category category5 = new Category("Luz");
+        categoryDao.addExpenseCategory(category1);
+        categoryDao.addExpenseCategory(category2);
+        categoryDao.addExpenseCategory(category3);
+        categoryDao.addExpenseCategory(category4);
+        categoryDao.addExpenseCategory(category5);
+        categoryDao.getAllExpenseCategory();
+
+        CategoryManager categoryManager = new CategoryManager();
+        categoryManager.displayExpenseCategories();
+
+
 
     }
 }
